@@ -1,0 +1,4 @@
+Lambda expression:
+County3: City7, City8, City9
+County2: City4, City5, City6
+County1: City1, City2, City3

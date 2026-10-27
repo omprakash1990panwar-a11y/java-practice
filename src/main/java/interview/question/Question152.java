@@ -1,0 +1,42 @@
+package interview.question;
+
+import interview.UtilPackages.Employee;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+// --------------------------------------------------
+// Question 152: Find the second-highest-paid employee
+// Important: max() selects the employee with the highest salary.
+// It returns Optional<Employee> because the list could be empty.
+// --------------------------------------------------
+public class Question152 {
+    public static void main(String[] args) {
+        // Create a list of Employee objects
+        List<Employee> employees = Arrays.asList(
+                new Employee("Amit", "IT", "Developer", 80000),
+                new Employee("Priya", "IT", "Tester", 60000),
+                new Employee("Rahul", "IT", "Developer", 90000),
+                new Employee("Neha", "HR", "Manager", 75000),
+                new Employee("Karan", "HR", "Recruiter", 50000),
+                new Employee("Sneha", "Finance", "Analyst", 70000),
+                new Employee("Vikas", "Finance", "Accountant", 65000),
+                new Employee("Amit", "IT", "Developer", 80000)
+        );
+
+        // Find the second-highest-paid employee
+        // Use stream API to find the distinct salaries, sort them in descending order, skip the first one, and then find the first one
+        employees.stream()
+                .map(Employee::getSalary) // Map each employee to their salary
+                .distinct() // Get distinct salaries
+                .sorted(Comparator.reverseOrder()) // Sort salaries in descending order
+                .skip(1) // Skip the first salary (the highest one)
+                .findFirst() // Find the first salary
+                .ifPresent(salary -> System.out.println(
+                        // Print the second-highest salary
+                        "Second-highest distinct salary: " + salary
+                ));
+    }
+}
